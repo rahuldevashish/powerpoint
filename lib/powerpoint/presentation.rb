@@ -30,6 +30,10 @@ module Powerpoint
       @slides << Powerpoint::Slide::Pictorial.new(presentation: self, title: title, image_path: image_path, coords: coords)
     end
 
+    def add_background_picture_slide(image_path)
+      @slides << Powerpoint::Slide::BackgroundPicture.new(presentation: self, image_path: image_path)
+    end
+
     def add_text_picture_slide(title, image_path, content = [])
       @slides << Powerpoint::Slide::TextPicSplit.new(presentation: self, title: title, image_path: image_path, content: content)
     end
