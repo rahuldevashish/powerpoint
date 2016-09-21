@@ -8,10 +8,10 @@ module Powerpoint
     class BackgroundPicture
       include Powerpoint::Util
 
-      attr_reader :image_name, :image_path
+      attr_reader :image_name, :title, :image_path
 
       def initialize(options={})
-        require_arguments [:presentation, :image_path], options
+        require_arguments [:presentation, :title, :image_path], options
         options.each {|k, v| instance_variable_set("@#{k}", v)}
         @image_name = File.basename(@image_path)
       end
