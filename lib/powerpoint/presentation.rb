@@ -6,10 +6,18 @@ module Powerpoint
   class Presentation
     include Powerpoint::Util
 
-    attr_reader :slides
+    PTS_TO_EMU     = 12700
+    DEFAULT_WIDTH  = 720
+    DEFAULT_HEIGHT = 540
 
-    def initialize
+    attr_reader :slides, :presentation_width, :presentation_height
+
+    def initialize(options={})
       @slides = []
+
+      # The presentation width & height expressed in EMUs, with defaults
+      @presentation_width  = ( options[:presentation_width]  || DEFAULT_WIDTH  ) * PTS_TO_EMU
+      @presentation_height = ( options[:presentation_height] || DEFAULT_HEIGHT ) * PTS_TO_EMU
     end
 
     def add_intro(title, subtitile = nil)

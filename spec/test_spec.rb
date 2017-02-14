@@ -17,6 +17,41 @@ describe 'Powerpoint parsing a sample PPTX file' do
   end
 
   it 'Create a PPTX file successfully.' do
-    #@deck.should_not be_nil
+    @deck.should_not be_nil
+  end
+end
+
+describe 'Setting Presentation Height and Width' do
+
+  before(:all) do
+    @pts_to_emu = Powerpoint::Presentation::PTS_TO_EMU
+  end
+
+  context 'defaults' do
+    before(:each) do
+      @deck = Powerpoint::Presentation.new
+    end
+
+    it 'allows for a default presentation_width' do
+      expect(@deck.presentation_width).to eq(Powerpoint::Presentation::DEFAULT_WIDTH * @pts_to_emu)
+    end
+
+    it 'allows for a default presentation_height' do
+      expect(@deck.presentation_height).to eq(Powerpoint::Presentation::DEFAULT_HEIGHT * @pts_to_emu)
+    end
+  end
+
+  context 'custom width and height' do
+    before(:each) do
+      @deck = Powerpoint::Presentation.new(presentation_width: 1920, presentation_height: 1200)
+    end
+
+    it 'allows the presentation_width to be set' do
+      expect(@deck.presentation_width).to eq(1920 * @pts_to_emu)
+    end
+
+    it 'allows the presentation_height to be set' do
+      expect(@deck.presentation_height).to eq(1200 * @pts_to_emu)
+    end
   end
 end
